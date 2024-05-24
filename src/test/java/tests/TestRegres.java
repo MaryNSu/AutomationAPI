@@ -54,4 +54,30 @@ public class TestRegres {
         isBodyContains(response, "id");
 
     }
+
+    @Test
+    public void testUpdate(){
+        String url = "/api/users/2";
+
+        String body = "{\n" +
+                "    \"name\": \"morpheus\",\n" +
+                "    \"job\": \"zion resident\"\n" +
+                "}";
+        Response response = PUT(body, url);
+
+        isStatusCodeValid(response, 200);
+
+        isBodyContainsValue(response, "job", "zion resident");
+
+    }
+
+    @Test
+    public void testDelete(){
+        String url = "/api/users/2";
+
+        Response response = DELETE(url);
+
+        isStatusCodeValid(response, 204);
+    }
+
 }
