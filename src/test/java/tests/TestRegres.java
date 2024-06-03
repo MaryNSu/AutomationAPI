@@ -57,8 +57,7 @@ public class TestRegres {
 
     @Test
     public void testUpdate(){
-        String url = "/api/users/2";
-
+        String url = "/users/2";
         String body = "{\n" +
                 "    \"name\": \"morpheus\",\n" +
                 "    \"job\": \"zion resident\"\n" +
@@ -73,11 +72,26 @@ public class TestRegres {
 
     @Test
     public void testDelete(){
-        String url = "/api/users/2";
+        String url = "/users/2";
 
         Response response = DELETE(url);
 
         isStatusCodeValid(response, 204);
     }
 
+    @Test
+    public void testPatch(){
+        String url = "/users/2";
+        String body = "{\n" +
+                "        \"name\": \"morpheus\",\n" +
+                "                \"job\": \"zion resident\",\n" +
+                "                \"updatedAt\": \"2024-05-27T14:56:03.605Z\"\n" +
+                "    }";
+        Response response = PATCH(body, url);
+
+        isStatusCodeValid(response, 200);
+
+        isBodyContainsValue(response, "job", "zion resident");
+
+    }
 }
